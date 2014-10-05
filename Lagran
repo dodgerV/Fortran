@@ -1,0 +1,36 @@
+       program Lagr
+       integer i,t
+       real x_main, upper,x
+       real Arr_X(5),Arr_Y(5)
+	x=1       
+       do i=1,5
+       Arr_X(i)=x
+       Arr_Y(i)=1/(3*x+3)
+	x=x+0.5		
+       print*,Arr_X(i),'Argument for function',Arr_Y(i)
+	end do
+	do t=1,5
+	x_main=Arr_X(t)
+       print*,'Lagrange polinom: ',upper(Arr_X,Arr_Y,x_main,t)
+	end do
+       end 
+       
+       real function upper(Arr_X,Arr_Y,x_main,t)
+       real Arr_X(5),Arr_Y(5),temp
+       integer i,j,p,t
+       real XX,op
+	temp=0
+	op=1
+       XX=x_main
+	do p=t,5
+	do i=1,5
+	if(p.NE.i) then 
+	op=op*((XX-Arr_X(i))/(Arr_X(p)-Arr_X(i)))
+	end if
+       end do
+       temp=temp+(Arr_Y(p)*op)
+       end do
+	upper=temp
+       end
+       
+         
