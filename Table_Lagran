@@ -1,0 +1,40 @@
+program Lagr
+       integer i,t
+       real x, upper,step,array_xk
+       real Arr_X(6),Arr_Y(6)
+	open(Unit=8,File='Table.txt', Status='old')
+	open(Unit=7,File='Final.txt', Status='new')
+       do i=1,6
+	read(8,*)Arr_X(i),Arr_Y(i)
+       print*,Arr_X(i),'Argument for function',Arr_Y(i)
+        end do
+	close(8)
+	step=1
+	print*,'Enter step= '
+	read(5,*) step
+	t=1
+	array_xk=Arr_X(6)+step/2
+        do x=Arr_X(1),array_xk,step
+	write(7,*) x,upper(Arr_X,Arr_Y,x)
+        end do
+	close(7)
+       end
+
+	real function upper(Arr_X,Arr_Y,x)
+       real Arr_X(6),Arr_Y(6),temp
+       integer i,j,p
+       real XX,op
+        temp=0
+       XX=x
+        do p=1,6
+	op=1
+        do i=1,6
+        if(p.NE.i) then
+        op=op*((XX-Arr_X(i))/(Arr_X(p)-Arr_X(i)))
+        end if
+       end do
+       temp=temp+(Arr_Y(p)*op)
+       end do
+        upper=temp
+	write(6,*) temp
+       end
